@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мебельный салон Elegance - Главная страница</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2E8B57;
+            --accent-color: #FF6B6B;
+            --background-color: #F9F9F9;
+            --text-color: #333333;
+            --white: #FFFFFF;
+            --dark-overlay: rgba(0, 0, 0, 0.5);
+            --shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+ /* Шапка сайта */
+ header {
+        background: var(--white);
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        transition: all 0.3s ease;
+    }
+    
+    /* Эффект при скролле */
+    header.scrolled {
+        padding: 5px 0;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(10px);
+    }
+    
+    .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 0;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .logo {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        display: flex;
+        align-items: center;
+        transition: transform 0.3s;
+    }
+    
+    .logo:hover {
+        transform: scale(1.03);
+    }
+    
+    .logo i {
+        margin-right: 10px;
+        font-size: 2rem;
+        color: var(--primary-color);
+        transition: transform 0.5s;
+    }
+    
+    .logo:hover i {
+        transform: rotate(-15deg);
+    }
+    
+    nav ul {
+        display: flex;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    
+    nav li {
+        margin-left: 30px;
+        position: relative;
+    }
+    
+    nav a {
+        text-decoration: none;
+        color: var(--text-color);
+        font-weight: 500;
+        transition: color 0.3s;
+        position: relative;
+        padding: 5px 0;
+    }
+    
+    nav a:hover {
+        color: var(--primary-color);
+    }
+    
+    nav a::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--primary-color);
+        transition: width 0.3s;
+    }
+    
+    nav a:hover::after {
+        width: 100%;
+    }
+    
+    /* Активный пункт меню */
+    nav a.active {
+        color: var(--primary-color);
+        font-weight: 600;
+    }
+    
+    nav a.active::after {
+        width: 100%;
+    }
+    
+    .header-icons {
+        display: flex;
+        align-items: center;
+    }
+    
+    .header-icons i {
+        font-size: 1.3rem;
+        margin-left: 20px;
+        color: var(--text-color);
+        cursor: pointer;
+        transition: all 0.3s;
+        position: relative;
+    }
+    
+    .header-icons i:hover {
+        color: var(--primary-color);
+        transform: translateY(-2px);
+    }
+    
+    /* Бейдж для корзины */
+    .cart-badge {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background: var(--primary-color);
+        color: white;
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        font-size: 0.7rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: sans-serif;
+    }
+    
+    /* Кнопка мобильного меню */
+    .mobile-menu-btn {
+        display: none;
+        cursor: pointer;
+        font-size: 1.5rem;
+        color: var(--text-color);
+        transition: all 0.3s;
+    }
+    
+    .mobile-menu-btn:hover {
+        color: var(--primary-color);
+        transform: scale(1.1);
+    }
+    
+    /* Анимация иконок при наведении */
+    .fa-search:hover {
+        transform: scale(1.1) rotate(-5deg);
+    }
+    
+    .fa-user:hover {
+        transform: scale(1.1) rotate(5deg);
+    }
+    
+    .fa-shopping-cart:hover {
+        animation: shake 0.5s;
+    }
+    
+    @keyframes shake {
+        0%, 100% { transform: rotate(0deg); }
+        25% { transform: rotate(-10deg); }
+        75% { transform: rotate(10deg); }
+    }
+    
+    /* Медиа-запросы для адаптива */
+    @media (max-width: 992px) {
+        nav {
+            display: none;
+        }
+        
+        .header-icons i:not(.fa-bars) {
+            display: none;
+        }
+        
+        .mobile-menu-btn {
+            display: block;
+        }
+        
+        .header-container {
+            padding: 15px 20px;
+        }
+    }
+        
+        /* Баннер */
+        .banner {
+            position: relative;
+            height: 500px;
+            background: url('https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center center;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark-overlay);
+        }
+        
+        .banner-content {
+            position: relative;
+            text-align: center;
+            color: var(--white);
+            padding: 30px;
+            max-width: 800px;
+            z-index: 2;
+        }
+        
+        .banner-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards 0.3s;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .banner-subtitle {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards 0.6s;
+            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .banner-btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards 0.9s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .banner-btn:hover {
+            transform: scale(1.05) translateY(-5px);
+            background-color: #267349;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Блок акционных товаров */
+        .sale-section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: var(--primary-color);
+            position: relative;
+            padding-bottom: 15px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s forwards 0.2s;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--accent-color);
+            border-radius: 2px;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+        
+        .product-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .product-card:nth-child(1) { animation: fadeInUp 0.6s forwards 0.4s; }
+        .product-card:nth-child(2) { animation: fadeInUp 0.6s forwards 0.6s; }
+        .product-card:nth-child(3) { animation: fadeInUp 0.6s forwards 0.8s; }
+        .product-card:nth-child(4) { animation: fadeInUp 0.6s forwards 1s; }
+        
+        .product-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        .product-image-container {
+            position: relative;
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .product-card:hover .product-image {
+            transform: scale(1.1);
+        }
+        
+        .discount-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--accent-color);
+            color: var(--white);
+            font-weight: 700;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            z-index: 2;
+        }
+        
+        .quick-view {
+            position: absolute;
+            bottom: -40px;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            text-align: center;
+            padding: 10px;
+            transition: bottom 0.3s ease;
+            z-index: 2;
+        }
+        
+        .product-card:hover .quick-view {
+            bottom: 0;
+        }
+        
+        .quick-view-btn {
+            background: var(--primary-color);
+            color: var(--white);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .quick-view-btn:hover {
+            background: #267349;
+        }
+        
+        .product-details {
+            padding: 20px;
+            position: relative;
+        }
+        
+        .product-name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--text-color);
+            transition: color 0.3s;
+        }
+        
+        .product-card:hover .product-name {
+            color: var(--primary-color);
+        }
+        
+        .price-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .old-price {
+            text-decoration: line-through;
+            color: #888;
+            margin-right: 10px;
+            font-size: 0.95rem;
+        }
+        
+        .new-price {
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: var(--accent-color);
+        }
+        
+        .add-to-cart {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 4px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            box-shadow: 0 4px 10px rgba(46, 139, 87, 0.3);
+        }
+        
+        .add-to-cart:hover {
+            transform: scale(1.03);
+            background-color: #267349;
+        }
+        
+        .add-to-cart:active {
+            transform: scale(0.98);
+        }
+        
+        .add-to-cart i {
+            margin-right: 8px;
+        }
+        
+        /* Блок преимуществ */
+        .benefits-section {
+            background: linear-gradient(135deg, #2E8B57 0%, #1f6340 100%);
+            padding: 70px 0;
+            color: var(--white);
+        }
+        
+        .benefits-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            text-align: center;
+        }
+        
+        .benefit-card {
+            padding: 30px 20px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            transition: transform 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .benefit-card:nth-child(1) { animation: fadeInUp 0.6s forwards 0.3s; }
+        .benefit-card:nth-child(2) { animation: fadeInUp 0.6s forwards 0.5s; }
+        .benefit-card:nth-child(3) { animation: fadeInUp 0.6s forwards 0.7s; }
+        .benefit-card:nth-child(4) { animation: fadeInUp 0.6s forwards 0.9s; }
+        
+        .benefit-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .benefit-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+        
+        .benefit-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+        
+        .benefit-description {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+        
+        /* Подвал */
+        footer {
+            background: #222;
+            color: #ccc;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--white);
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--primary-color);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-column ul li a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--primary-color);
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: #333;
+            border-radius: 50%;
+            color: var(--white);
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: var(--primary-color);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #444;
+            font-size: 0.9rem;
+            color: #888;
+        }
+        
+        /* Анимации */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        .bounce {
+            animation: bounce 2s infinite;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 1024px) {
+            .products-grid, .benefits-container, .footer-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .banner-title {
+                font-size: 3rem;
+            }
+            
+            .banner-subtitle {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .products-grid, .benefits-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .banner {
+                height: 400px;
+            }
+            
+            .banner-title {
+                font-size: 2.5rem;
+            }
+            
+            .banner-subtitle {
+                font-size: 1.3rem;
+            }
+            
+            nav ul {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+                font-size: 1.5rem;
+                cursor: pointer;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .products-grid, .benefits-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .banner {
+                height: 350px;
+            }
+            
+            .banner-title {
+                font-size: 2rem;
+            }
+            
+            .banner-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .banner-content {
+                padding: 15px;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .header-icons {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-couch"></i>
+                <span>Elegance</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">Главная</a></li>
+                    <li><a href="#">Каталог</a></li>
+                    <li><a href="#">О нас</a></li>
+                    <li><a href="#">Акции</a></li>
+                    <li><a href="#">Контакты</a></li>
+                </ul>
+            </nav>
+            <div class="header-icons">
+                <i class="fas fa-search"></i>
+                <i class="fas fa-user"></i>
+                <i class="fas fa-shopping-cart">
+                    <span class="cart-badge">3</span>
+                </i>
+            </div>
+            <div class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Баннер -->
+    <section class="banner">
+        <div class="banner-content">
+            <h1 class="banner-title">Скидки до 30% на всю мебель!</h1>
+            <p class="banner-subtitle">Только до конца месяца</p>
+            <a href="#" class="banner-btn pulse">Выбрать мебель</a>
+        </div>
+    </section>
+    
+    <!-- Блок акционных товаров -->
+    <section class="sale-section">
+        <div class="container">
+            <h2 class="section-title">Акционные товары</h2>
+            <div class="products-grid">
+                <!-- Товар 1 -->
+                <div class="product-card">
+                    <div class="discount-badge">-20%</div>
+                    <div class="product-image-container">
+                        <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="Диван угловой 'Лотос'" class="product-image">
+                        <div class="quick-view">
+                            <button class="quick-view-btn">Быстрый просмотр</button>
+                        </div>
+                    </div>
+                    <div class="product-details">
+                        <h3 class="product-name">Диван угловой "Лотос"</h3>
+                        <div class="price-container">
+                            <span class="old-price">150 000₸</span>
+                            <span class="new-price">120 000₸</span>
+                        </div>
+                        <button class="add-to-cart"><i class="fas fa-shopping-cart"></i> В корзину</button>
+                    </div>
+                </div>
+                
+                <!-- Товар 2 -->
+                <div class="product-card">
+                    <div class="discount-badge">-25%</div>
+                    <div class="product-image-container">
+                        <img src="https://images.unsplash.com/photo-1567538096630-e0c55bd6354f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" alt="Стол обеденный 'Олимп'" class="product-image">
+                        <div class="quick-view">
+                            <button class="quick-view-btn">Быстрый просмотр</button>
+                        </div>
+                    </div>
+                    <div class="product-details">
+                        <h3 class="product-name">Стол обеденный "Олимп"</h3>
+                        <div class="price-container">
+                            <span class="old-price">85 000₸</span>
+                            <span class="new-price">68 000₸</span>
+                        </div>
+                        <button class="add-to-cart"><i class="fas fa-shopping-cart"></i> В корзину</button>
+                    </div>
+                </div>
+                
+                <!-- Товар 3 -->
+                <div class="product-card">
+                    <div class="discount-badge">-30%</div>
+                    <div class="product-image-container">
+                        <img src="https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="Шкаф-купе 'Гармония'" class="product-image">
+                        <div class="quick-view">
+                            <button class="quick-view-btn">Быстрый просмотр</button>
+                        </div>
+                    </div>
+                    <div class="product-details">
+                        <h3 class="product-name">Шкаф-купе "Гармония"</h3>
+                        <div class="price-container">
+                            <span class="old-price">210 000₸</span>
+                            <span class="new-price">147 000₸</span>
+                        </div>
+                        <button class="add-to-cart"><i class="fas fa-shopping-cart"></i> В корзину</button>
+                    </div>
+                </div>
+                
+                <!-- Товар 4 -->
+                <div class="product-card">
+                    <div class="discount-badge">-30%</div>
+                    <div class="product-image-container">
+                        <img src="https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80" alt="Кресло 'Комфорт Плюс'" class="product-image">
+                        <div class="quick-view">
+                            <button class="quick-view-btn">Быстрый просмотр</button>
+                        </div>
+                    </div>
+                    <div class="product-details">
+                        <h3 class="product-name">Кресло "Комфорт Плюс"</h3>
+                        <div class="price-container">
+                            <span class="old-price">55 000₸</span>
+                            <span class="new-price">38 500₸</span>
+                        </div>
+                        <button class="add-to-cart"><i class="fas fa-shopping-cart"></i> В корзину</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Блок преимуществ -->
+    <section class="benefits-section">
+        <div class="container">
+            <div class="benefits-container">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-truck bounce"></i>
+                    </div>
+                    <h3 class="benefit-title">Бесплатная доставка</h3>
+                    <p class="benefit-description">Доставляем мебель бесплатно по всему городу при заказе от 100 000₸</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-gift bounce"></i>
+                    </div>
+                    <h3 class="benefit-title">Подарки при покупке</h3>
+                    <p class="benefit-description">К каждой покупке дарим полезные аксессуары для вашего дома</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-shield-alt bounce"></i>
+                    </div>
+                    <h3 class="benefit-title">Гарантия 3 года</h3>
+                    <p class="benefit-description">На всю мебель предоставляем расширенную гарантию на 3 года</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-undo bounce"></i>
+                    </div>
+                    <h3 class="benefit-title">Легкий возврат</h3>
+                    <p class="benefit-description">Возврат товара в течение 14 дней без лишних вопросов</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Подвал -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-column">
+                    <h3>О компании</h3>
+                    <p>Мебельный салон Elegance - это современная мебель премиум-класса для вашего дома. Мы создаем уют и комфорт с 2010 года.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-vk"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Категории</h3>
+                    <ul>
+                        <li><a href="#">Гостиная</a></li>
+                        <li><a href="#">Спальня</a></li>
+                        <li><a href="#">Кухня</a></li>
+                        <li><a href="#">Детская</a></li>
+                        <li><a href="#">Офисная</a></li>
+                        <li><a href="#">Садовые</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Помощь</h3>
+                    <ul>
+                        <li><a href="#">Доставка и оплата</a></li>
+                        <li><a href="#">Гарантия</a></li>
+                        <li><a href="#">Возврат товара</a></li>
+                        <li><a href="#">Сборка мебели</a></li>
+                        <li><a href="#">Вопросы и ответы</a></li>
+                        <li><a href="#">Контакты</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Контакты</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> г. Алматы, ул. Кабанбай батыра 154</li>
+                        <li><i class="fas fa-phone"></i> +7 (777) 123-45-67</li>
+                        <li><i class="fas fa-envelope"></i> info@elegance.kz</li>
+                        <li><i class="fas fa-clock"></i> Пн-Пт: 9:00-20:00</li>
+                        <li><i class="fas fa-clock"></i> Сб-Вс: 10:00-18:00</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                © 2023 Мебельный салон Elegance. Все права защищены.
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+ // Эффект при скролле
+ window.addEventListener('scroll', function() {
+        const header = document.querySelector('header');
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Анимация для кнопки "В корзину"
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+            
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Анимация при клике
+                    this.classList.add('animate__animated', 'animate__pulse');
+                    
+                    // Сбрасываем анимацию после завершения
+                    setTimeout(() => {
+                        this.classList.remove('animate__animated', 'animate__pulse');
+                    }, 500);
+                    
+                    // Создаем эффект добавления в корзину
+                    const cartIcon = document.querySelector('.fa-shopping-cart');
+                    cartIcon.classList.add('animate__animated', 'animate__bounce');
+                    
+                    setTimeout(() => {
+                        cartIcon.classList.remove('animate__animated', 'animate__bounce');
+                    }, 1000);
+                    
+                    // Сообщение об успешном добавлении
+                    const productName = this.closest('.product-card').querySelector('.product-name').textContent;
+                    alert(`Товар "${productName}" добавлен в корзину!`);
+                });
+            });
+            
+            // Анимация для кнопки быстрого просмотра
+            const quickViewButtons = document.querySelectorAll('.quick-view-btn');
+            
+            quickViewButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const productCard = this.closest('.product-card');
+                    const productName = productCard.querySelector('.product-name').textContent;
+                    alert(`Быстрый просмотр товара: ${productName}`);
+                });
+            });
+            
+            // Параллакс-эффект для баннера
+            window.addEventListener('scroll', function() {
+                const scrollPosition = window.pageYOffset;
+                const banner = document.querySelector('.banner');
+                banner.style.backgroundPosition = `center ${scrollPosition * 0.5}px`;
+            });
+        });
+    </script>
+</body>
+</html>
